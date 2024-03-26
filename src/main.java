@@ -3,7 +3,6 @@ import javax.swing.JOptionPane;
 public class main {
 
     public static void main(String[] args) {
-
         Arvore ab = new Arvore();
         String menu = "Menu de Opções criando árvore binária\n" +
                 "1 - Adicionar Elemento\n" +
@@ -16,68 +15,70 @@ public class main {
                 "8 - Ver altura de um nó\n" +
                 "9 - Impressão da árvore com identação\n" +
                 "99 - Sair";
-        int op = 0, num;
+        int op = 0;
 
         while (op != 99) {
-            op = Integer.parseInt(JOptionPane.showInputDialog(menu));
-            switch (op) {
-
-                case 1:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite um Número: "));
-                    ab.adicionaElemento(num);
-                    break;
-                case 2:
-                    System.out.println("Pré-Ordem:");
-                    ab.preOrdem();
-                    System.out.println();
-                    break;
-                case 3:
-                    System.out.println("Pós-Ordem:");
-                    ab.posOrdem();
-                    System.out.println();
-                    break;
-                case 4:
-                    System.out.println("Em Ordem:");
-                    ab.emOrdem();
-                    System.out.println();
-                    break;
-                case 5:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int nivel = ab.nivelNo(num);
-                    if (nivel == -1)
-                        System.out.println("Nó não encontrado na árvore.");
-                    else
-                        System.out.println("Nível do Nó: " + nivel);
-                    break;
-                case 6:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int profundidadeNo = ab.profundidadeNo(num);
-                    if (profundidadeNo == -1)
-                        System.out.println("Nó não encontrado na árvore.");
-                    else
-                        System.out.println("Profundidade do Nó: " + profundidadeNo);
-                    break;
-                case 7:
-                    int profundidadeArvore = ab.profundidadeArvore();
-                    System.out.println("Profundidade da Árvore: " + profundidadeArvore);
-                    break;
-                case 8:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int alturaNo = ab.alturaNo(num);
-                    if (alturaNo == -1)
-                        System.out.println("Nó não encontrado na árvore.");
-                    else
-                        System.out.println("Altura do Nó: " + alturaNo);
-                    break;
-                case 9:
-                    System.out.println("Impressão da Árvore com Identação:");
-                    ab.imprimirComIdentacao();
-                    break;
+            try {
+                op = Integer.parseInt(JOptionPane.showInputDialog(menu));
+                switch (op) {
+                    case 1:
+                        int num = Integer.parseInt(JOptionPane.showInputDialog("Digite um Número: "));
+                        ab.adicionaElemento(num);
+                        break;
+                    case 2:
+                        System.out.println("Pré-Ordem:");
+                        ab.preOrdem();
+                        System.out.println();
+                        break;
+                    case 3:
+                        System.out.println("Pós-Ordem:");
+                        ab.posOrdem();
+                        System.out.println();
+                        break;
+                    case 4:
+                        System.out.println("Em Ordem:");
+                        ab.emOrdem();
+                        System.out.println();
+                        break;
+                    case 5:
+                        int valorNo = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
+                        int nivel = ab.nivelNo(valorNo);
+                        if (nivel == -1)
+                            System.out.println("Nó não encontrado na árvore.");
+                        else
+                            System.out.println("Nível do Nó: " + nivel);
+                        break;
+                    case 6:
+                        valorNo = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
+                        int profundidadeNo = ab.profundidadeNo(valorNo);
+                        if (profundidadeNo == -1)
+                            System.out.println("Nó não encontrado na árvore.");
+                        else
+                            System.out.println("Profundidade do Nó: " + profundidadeNo);
+                        break;
+                    case 7:
+                        int profundidadeArvore = ab.profundidadeArvore();
+                        System.out.println("Profundidade da Árvore: " + profundidadeArvore);
+                        break;
+                    case 8:
+                        valorNo = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
+                        int alturaNo = ab.alturaNo(valorNo);
+                        if (alturaNo == -1)
+                            System.out.println("Nó não encontrado na árvore.");
+                        else
+                            System.out.println("Altura do Nó: " + alturaNo);
+                        break;
+                    case 9:
+                        System.out.println("Impressão da Árvore com Identação:");
+                        ab.imprimirComIdentacao();
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, insira um número válido.");
             }
         }
     }
 }
-
 class Arvore {
     private No raiz;
 
