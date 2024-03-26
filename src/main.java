@@ -3,89 +3,92 @@ import javax.swing.JOptionPane;
 public class main {
 
     public static void main(String[] args) {
+        ArvoreBinaria arvoreBinaria = new ArvoreBinaria();
+        Menu menu = new Menu(arvoreBinaria);
+        menu.exibirMenu();
+    }
+}
 
-        Arvore ab = new Arvore();
-        String menu = "Menu de Opções criando árvore binária\n" +
-                "1 - Adicionar Elemento\n" +
-                "2 - Ver elementos em pré-ordem\n" +
-                "3 - Ver elementos em pós-ordem\n" +
-                "4 - Ver elementos em ordem\n" +
-                "5 - Ver nível de um nó\n" +
-                "6 - Ver profundidade de um nó\n" +
-                "7 - Ver profundidade da árvore\n" +
-                "8 - Ver altura de um nó\n" +
-                "9 - Impressão da árvore com identação\n" +
-                "99 - Sair";
-        int op = 0, num;
+class Menu {
+    private ArvoreBinaria arvoreBinaria;
+    private String menuText = "ARVURE BINARIA\n" +
+            "1 - Adicionar Elemento\n" +
+            "2 - Ver elementos na pré-ordem\n" +
+            "3 - Ver elementos na pós-ordem\n" +
+            "4 - Ver elementos em ordem\n" +
+            "5 - Ver nível de um nó\n" +
+            "6 - Ver profundidade de um nó\n" +
+            "7 - Ver profundidade da árvore\n" +
+            "8 - Ver altura de um nó\n" +
+            "9 - Impressão da árvore com identação\n" +
+            "99 - Sair";
 
-        while (op != 99) {
-            op = Integer.parseInt(JOptionPane.showInputDialog(menu));
-            switch (op) {
+    public Menu(ArvoreBinaria arvoreBinaria) {
+        this.arvoreBinaria = arvoreBinaria;
+    }
 
+    public void exibirMenu() {
+        int opcao = 0;
+        while (opcao != 99) {
+            opcao = Integer.parseInt(JOptionPane.showInputDialog(menuText));
+            switch (opcao) {
                 case 1:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite um Número: "));
-                    ab.adicionaElemento(num);
+                    int num = Integer.parseInt(JOptionPane.showInputDialog("Digite um Número: "));
+                    arvoreBinaria.adicionarElemento(num);
                     break;
                 case 2:
-                    System.out.println("Pré-Ordem:");
-                    ab.preOrdem();
-                    System.out.println();
+                    arvoreBinaria.preOrdem();
                     break;
                 case 3:
-                    System.out.println("Pós-Ordem:");
-                    ab.posOrdem();
-                    System.out.println();
+                    arvoreBinaria.posOrdem();
                     break;
                 case 4:
-                    System.out.println("Em Ordem:");
-                    ab.emOrdem();
-                    System.out.println();
+                    arvoreBinaria.emOrdem();
                     break;
                 case 5:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int nivel = ab.nivelNo(num);
+                    int valor = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
+                    int nivel = arvoreBinaria.nivelNo(valor);
                     if (nivel == -1)
                         System.out.println("Nó não encontrado na árvore.");
                     else
                         System.out.println("Nível do Nó: " + nivel);
                     break;
                 case 6:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int profundidadeNo = ab.profundidadeNo(num);
+                    valor = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
+                    int profundidadeNo = arvoreBinaria.profundidadeNo(valor);
                     if (profundidadeNo == -1)
                         System.out.println("Nó não encontrado na árvore.");
                     else
                         System.out.println("Profundidade do Nó: " + profundidadeNo);
                     break;
                 case 7:
-                    int profundidadeArvore = ab.profundidadeArvore();
+                    int profundidadeArvore = arvoreBinaria.profundidadeArvore();
                     System.out.println("Profundidade da Árvore: " + profundidadeArvore);
                     break;
                 case 8:
-                    num = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int alturaNo = ab.alturaNo(num);
+                    valor = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
+                    int alturaNo = arvoreBinaria.alturaNo(valor);
                     if (alturaNo == -1)
                         System.out.println("Nó não encontrado na árvore.");
                     else
                         System.out.println("Altura do Nó: " + alturaNo);
                     break;
                 case 9:
-                    System.out.println("Impressão da Árvore com Identação:");
-                    ab.imprimirComIdentacao();
+                    arvoreBinaria.imprimirComIdentacao();
                     break;
             }
         }
     }
 }
 
-class Arvore {
+class ArvoreBinaria {
     private No raiz;
 
-    public Arvore() {
+    public ArvoreBinaria() {
         this.raiz = null;
     }
 
-    public void adicionaElemento(int valor) {
+    public void adicionarElemento(int valor) {
         raiz = adicionarRecursivo(raiz, valor);
     }
 
